@@ -51,9 +51,25 @@ function func(a, b){
     b = 0
 }
 
-
-
 func(a,b)
+console.log("While loop:")
+let x = 0
+while (x < 10){
+    console.log(x)
+    x++
+}
 
-if ()
+//while (school != false && day != "saturday"){
+//    goToSchool()
+//}
+console.log("For loop:")
+for (let y = 0; y < 10; y++){
+    //console.log(y % 2 === 0)
+    console.log(y)
+}
+
+let e = 0
+++e
+console.log(e)
+
 
