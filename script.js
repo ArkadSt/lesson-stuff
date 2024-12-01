@@ -72,4 +72,7 @@ let e = 0
 ++e
 console.log(e)
 
-
+const gh = [1,2,3]
+console.log(gh)
+gh.push(-45)
+console.log(gh)
