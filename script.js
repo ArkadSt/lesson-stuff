@@ -52,27 +52,65 @@ function func(a, b){
 }
 
 func(a,b)
-console.log("While loop:")
-let x = 0
-while (x < 10){
-    console.log(x)
-    x++
-}
+
 
 //while (school != false && day != "saturday"){
 //    goToSchool()
 //}
-console.log("For loop:")
-for (let y = 0; y < 10; y++){
-    //console.log(y % 2 === 0)
-    console.log(y)
+function stuff1(){
+    console.log("While loop:")
+    let x = 0
+    while (x < 10){
+        console.log(x)
+        x++
+    }
+    console.log("For loop:")
+    for (let y = 0; y < 10; y++){
+        //console.log(y % 2 === 0)
+        console.log(y)
+    }
+
+    let e = 0
+    ++e
+    console.log(e)
+
+    const gh = [1,2,3]
+    console.log(gh)
+    gh.push(-45)
+    console.log(gh)
 }
 
-let e = 0
-++e
-console.log(e)
 
-const gh = [1,2,3]
-console.log(gh)
-gh.push(-45)
-console.log(gh)
+function even(num){
+    const arr = []
+    for (let x = num; x >= 0; x--){
+        if (x % 2 === 0){
+            arr.push(x)
+        }
+    }
+    return arr
+}
+
+//console.log(even(20))
+let isHuman = 0
+let x = 0
+document.addEventListener("DOMContentLoaded", ()=>{
+    let btn = document.getElementById("btn")
+    btn.addEventListener("mousemove", ()=>{
+        isHuman++
+        console.log(isHuman)
+    })
+
+    btn.addEventListener("click", ()=>{
+        if (isHuman >= 4){
+            alert("Human")
+        }else{
+            alert("Bot")
+        }
+        isHuman = 0
+
+        x++
+        console.log("Clicked " + x + " times.")
+    })
+})
+
