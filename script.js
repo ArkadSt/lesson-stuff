@@ -1,21 +1,29 @@
-function aaaa() {
-    if (true) {
+function aaaa(g) {
+
+    if (0 === '0') {
         var a = 1
         let b = "jifwoifj fj jfuoiefjoöeusrh"
 
         //b = 4
         console.log(b)
     }
+
     var a = 3
     console.log(a)
 
     let f = 1 === "1"
     let h = 2
+
     if (h >= 1) {
         console.log("true!")
+    } else if (h < 50){
+        console.log("h is less than 50")
     } else {
         console.log("false!")
     }
+
+
+
 
     function mult(a, b) {
         return a * b
@@ -113,4 +121,45 @@ document.addEventListener("DOMContentLoaded", ()=>{
         console.log("Clicked " + x + " times.")
     })
 })
+
+
+
+
+
+
+function sum(a,b){
+    return a+b
+}
+
+function mult(a,b){
+    return a*b
+}
+
+console.log(mult(5, sum(2,3)) === mult(5, sum(3,2)))
+
+console.log(true)
+
+function loop(){
+    let input = prompt("Type command (a,b,c,q): ")
+    if (input === 'a'){
+        alert("You have chosen a")
+    } else if (input === 'b'){
+        alert("You have chosen b")
+    } else if (input === 'c'){
+        alert("You have chosen c")
+    } else if (input === 'q'){
+        return
+    } else {
+        alert("invalid command. try again")
+    }
+    loop()
+}
+
+loop()
+
+
+
+
+
+
 
