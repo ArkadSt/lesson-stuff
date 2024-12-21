@@ -22,13 +22,14 @@ def
 #    print(x)
 
 class Car:
-    def __init__(self, name, max_speed, fuel, engine):
+    def __init__(self, name, max_speed, fuel_type, fuel_amount, engine):
         self.name = name
         self.speed = max_speed
-        self.fuel_type = fuel
+        self.fuel_type = fuel_type
+        self.fuel_amount = fuel_amount
         self.engine = engine
     def __str__(self):
-        return f"Car({self.speed}, {self.fuel_type}, {self.engine})"
+        return f"Car({self.speed}, {self.fuel_type}, {self.fuel_amount}, {self.engine})"
 
 class Racer:
 
@@ -44,13 +45,14 @@ class Racer:
 class Race:
     def __init__(self, length):
         self.length = length
+        self.winners = []
     def doRace(self, racer1, racer2):
         winner = random.choice([racer1, racer2])
         return winner
 
 
-toyota = Car("Toyota", 200, "бензин", None)
-ziguli = Car("Жигули", 1000000, "magic", "самогон")
+toyota = Car("Toyota", 200, "бензин", 100, None)
+ziguli = Car("Жигули", 1000000, "самогон", 200, "magic")
 zina = Racer("Баба Зина", math.inf, 0, ziguli)
 kristian = Racer("Kritsian", 13, 0, toyota)
 
