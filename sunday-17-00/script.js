@@ -135,9 +135,9 @@ function mult(a,b){
     return a*b
 }
 
-console.log(mult(5, sum(2,3)) === mult(5, sum(3,2)))
+//console.log(mult(5, sum(2,3)) === mult(5, sum(3,2)))
 
-console.log(true)
+//console.log(true)
 
 function loop(){
     let input = prompt("Type command (a,b,c,q): ")
@@ -155,7 +155,128 @@ function loop(){
     loop()
 }
 
-loop()
+//loop()
+
+
+
+let person = {
+    first_name: "Arkadi",
+    last_name: "Statsenko",
+    dateofbirth: {
+        year: 2003,
+        month: 5,
+        day: 17
+    },
+
+    languages: ["Estonian", "Russian", "English"],
+
+    setFirstName: function (name) {
+        this.first_name = name
+    },
+
+    /**
+     * a function that changes first name
+     * @param name name to change to
+     */
+    setLastName: function (name) {
+        this.last_name = name
+    },
+
+    printInfo() {
+        console.log(
+            "Name: " + this.first_name + " " + this.last_name
+        )
+    }
+}
+
+person.setFirstName("Arkadi")
+person.setLastName()
+console.log(person)
+
+class Person {
+    constructor(name, date_of_birth, isikukood) {
+        this.name = name
+        this.date_of_birth = date_of_birth
+
+        if (typeof isikukood != 'undefined'){
+            this.isikukood = isikukood
+        }
+    }
+
+
+    printInfo(){
+        console.log("Name: " + this.name)
+        console.log("Date of birth: " + this.date_of_birth.getDate() + "." + (this.date_of_birth.getMonth()+1) + "." + this.date_of_birth.getFullYear())
+        if (typeof this.isikukood != 'undefined'){
+            console.log("Isikukood: " + this.isikukood)
+        }
+    }
+}
+
+//arkadi = new Person("Arkadi Statsenko", new Date(2003, 4, 17))
+//arkadi1 = new Person("Arkadi Statsenko", new Date(2003, 4, 17), 50305170834)
+//oleg = new Person("Oleg ", new Date(2011, 2, 17))
+//arkadi.printInfo()
+//arkadi1.printInfo()
+
+class Car{
+    constructor(brand, max_speed) {
+        this.brand = brand
+        this.max_speed = max_speed
+    }
+
+    toString(){
+        return this.brand + " " + this.max_speed
+    }
+}
+class Racer{
+    constructor(name, car, time) {
+        this.name = name
+        this.car = car
+        this.time = time
+    }
+    printRacerInfo(){
+        console.log("Racer: " + this.name + " " + this.car + " " + this.time)
+    }
+}
+class Race{
+    constructor(racers) {
+        this.racers = racers
+    }
+    printRaceInfo(){
+        console.log("Racers:")
+        for (let x = 0; x - this.racers.length; x++){
+            this.racers[x].printRacerInfo()
+        }
+    }
+}
+
+const lamborghini = new Car("Lamborghini", 380)
+const ferrari = new Car("ferrari", 350)
+
+const oleg = Racer("Oleg", lamborghini, 20)
+const stepan = Racer("Stepan", ferrari, 30)
+
+const race = new Race([oleg, stepan])
+
+race.printRaceInfo()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
