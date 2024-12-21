@@ -31,6 +31,9 @@ class Car:
     def __str__(self):
         return f"Car({self.speed}, {self.fuel_type}, {self.fuel_amount}, {self.engine})"
 
+    def add_fuel(self, amount):
+        self.fuel_amount += amount
+
 class Racer:
 
     def __init__(self, name, age, streak, car):
@@ -46,7 +49,7 @@ class Race:
     def __init__(self, length):
         self.length = length
         self.winners = []
-    def doRace(self, racer1, racer2):
+    def do_race(self, racer1, racer2):
         winner = random.choice([racer1, racer2])
         return winner
 
