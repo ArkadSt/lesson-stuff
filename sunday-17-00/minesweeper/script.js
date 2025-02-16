@@ -41,3 +41,5 @@ function createButton(name){
 	document.body.appendChild(newButton)
 	newButton.addEventListener("click", newGame)
 }
+
+//comment
