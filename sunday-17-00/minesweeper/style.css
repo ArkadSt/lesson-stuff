@@ -1,0 +1,43 @@
+#board {
+    display: grid;
+    grid-template-columns: 35px 35px 35px 35px 35px 35px 35px 35px;
+}
+  
+.closedField {
+    width: 30px;
+    height: 30px;
+    border: 3px solid white;
+    background-color: black;
+}
+
+.x1 {
+    color: blue;
+}
+
+.x2 {
+    color: green;
+}
+
+.x3 {
+    color: red;
+}
+
+.x4 {
+    color: navy;
+}
+
+.x5 {
+    color: brown;
+}
+
+.x6 {
+    color: teal;
+}
+
+.x7 {
+    color: black;
+}
+
+.x8 {
+    color: gray;
+}
