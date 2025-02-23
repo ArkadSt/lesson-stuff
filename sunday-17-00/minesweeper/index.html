@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minesweeper</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script type="module">
+        import { InitGame } from './script.js';
+        document.addEventListener('DOMContentLoaded', InitGame);
+    </script>
 </head>
 <body>
-    <script>createButton("New Game")</script>
+    
     <div id="board"></div>
 </body>
 </html>
