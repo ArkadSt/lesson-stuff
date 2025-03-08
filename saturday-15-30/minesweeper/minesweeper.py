@@ -12,14 +12,23 @@ class Cell:
     def __init__(self):
         self._opened = False     
         self._has_mine = False
+        self._neighbouring_mines = 0
+        self._display = '-'
     def has_mine(self):
         return self._has_mine
     def set_mine(self):
         self._has_mine = True
     def open(self):
-        self._opened = True 
+        self._opened = True
+        self._display = ' '
     def is_opened(self):
         return self._opened
+    def increment_neighbouring_mines(self):
+        self._neighbouring_mines+=1
+        self._display = str(self._neighbouring_mines)
+    def display(self):
+        return self._display
+
 
 
 # create_board(10, 20, 10)
@@ -40,15 +49,18 @@ class Cell:
 # print ("что-то там") - выводит что-то там и переносит курсор на новую строку
 # print ("что-то там", end = "") - выводит что-то там и не переносит курсор на новую строку
 def display_board(board):
+    print(" ", end = " ")
+    for x in range(len(board[0])):
+        print(x, end = " ")
+    print()
 
-    for row in board:
+    for y, row in enumerate(board):
+        print(y, end = " ")
         for cell in row:
-            if cell.is_opened():
-                print(" ", end = " ")
-            elif cell.has_mine():
+            if cell.has_mine():
                 print("*", end = " ")
             else:
-                print("-", end = " ")
+                print(cell.display(), end = " ")
         print()
 
 
@@ -72,30 +84,62 @@ def place_mines(board, mines):
     mine_positions = random.sample([(x, y) for x in range(width) for y in range(height)], mines)
     for (x, y) in mine_positions:
         board[y][x].set_mine() 
-# вообще не уверен в правильности
 # генератор, котрый создает список всех возможных позиций на доске
-#https://youtu.be/dQw4w9WgXcQ
+
 
 # a = []
 # for y in range(height):
 #     for x in range(width):
 #         a.append((x, y))
 
-difficulty = input("Select your difficulty: 1- Easy 2- Normal 3- difficult 4- insane 5- hard as heck").strip()
+def play(board):
+    while True:
+        display_board(board)
+        x, y = map(int, input("Enter coordinates (x y): ").split())
+        cell = board[y][x]
+        if cell.has_mine():
+            print('Game over! You hit a mine.')
+            break
+        else:
+            cell.open()
+            neighbors = [
+                (y-1,x+1),  (y- 1, x),  (y-1, x+1),    
+                (y,x-1),                (y, x+1),
+                (y+1,x-1),  (y+1, x),   (y+1,x+1)
+            ]
+            # cell.neigbouring_mines += 1
+            for neighbour in neighbors:
+                (y, x) = neighbors
+                try:
+                    neighbour_cell = board[y][x]
+                    if neighbour_cell.has_mine():
+                        cell.increment_neighbouring_mines()
+                except IndexError:
+                    pass
+
+def init_game(height, width, mines):
+    board = create_board(height, width, mines)
+    play(board)
+
+difficulty = input("Select your difficulty: 1- Easy 2- Normal 3- difficult 4- insane 5- hard as heck ").strip()
 
 match difficulty:
     case "1":
         print("You selected easy")
-        board = create_board(10, 10, 10)
-        display_board(board)
+        init_game(10, 10, 10)
     case "2":
         print("You selected normal")
+        init_game(10, 10, 20)
     case "3":
         print("You selected difficult")
+        init_game(10, 10, 30)
     case "4":
         print("You selected insane")
+        init_game(15, 15, 50)
     case "5":
         print("You selected hard as heck")
+        init_game(15, 15, 75)
     case _:
         print("Invalid selection")
         exit()
+        
