@@ -4,6 +4,7 @@ class Cell{
     #hasMine;
     #isRevealed;
     #isFlagged;
+    #neighbouringBombs;
     
 
     constructor(){
@@ -13,19 +14,28 @@ class Cell{
         this.#hasMine = false;
         this.#isRevealed = false;
         this.#isFlagged = false;
+        this.#neighbouringBombs = 0
     }
 
     #onFieldClick(event) {
         event.target.style.backgroundColor = "red";
+        if (this.#hasMine ){
+            event.target.style.backgroundColor = "yellow";
+        } else {
+            event.target.innedHTML = `<p>${this.#neighbouringBombs}</p>`;
+        }
     }
     setMine(){
-        this.#hasMine = true
+        this.#hasMine = true;
     }
     getElement(){
         return this.#element;
     }
     hasMine(){
-        return this.#hasMine
+        return this.#hasMine;
+    }
+    addNeighbouringBomb(){
+        this.#neighbouringBombs++
     }
 
 }
