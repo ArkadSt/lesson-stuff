@@ -1,6 +1,6 @@
-import Cell from "./cell";
+// import Cell from "./cell";
 
-let minesCount = 10;
+// let minesCount = 10;
 
 // board = [
 //     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],

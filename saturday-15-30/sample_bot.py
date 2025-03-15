@@ -23,7 +23,6 @@ async def on_message(msg):
             await msg.channel.send(f"Hi, {msg.author.display_name}")
 
 
-# поменяйте идентификаторы!
 @client.event
 async def on_raw_reaction_add(payload):
     if payload.message_id == config["message_id"]:

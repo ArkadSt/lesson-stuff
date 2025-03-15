@@ -1,13 +1,5 @@
-# a = [
-#     [1, 2, 3],
-#     [4, 5, 6],
-#     [7, 8, 9]
-# ]
-
-# print(a[1][0])
-
 import random
-        
+
 class Cell:
     def __init__(self):
         self._opened = False     
@@ -24,30 +16,12 @@ class Cell:
     def is_opened(self):
         return self._opened
     def increment_neighbouring_mines(self):
-        self._neighbouring_mines+=1
+        self._neighbouring_mines += 1
         self._display = str(self._neighbouring_mines)
-    def display(self):
+    def __str__(self):
         return self._display
 
 
-
-# create_board(10, 20, 10)
-# board = [
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,],
-#     [Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell, Cell,Cell, Cell,]
-# ]
-# print(board[1][2])
-
-# print ("что-то там") - выводит что-то там и переносит курсор на новую строку
-# print ("что-то там", end = "") - выводит что-то там и не переносит курсор на новую строку
 def display_board(board):
     print(" ", end = " ")
     for x in range(len(board[0])):
@@ -60,7 +34,7 @@ def display_board(board):
             if cell.has_mine():
                 print("*", end = " ")
             else:
-                print(cell.display(), end = " ")
+                print(cell, end = " ")
         print()
 
 
@@ -87,29 +61,32 @@ def place_mines(board, mines):
 # генератор, котрый создает список всех возможных позиций на доске
 
 
-# a = []
-# for y in range(height):
-#     for x in range(width):
-#         a.append((x, y))
-
 def play(board):
     while True:
         display_board(board)
-        x, y = map(int, input("Enter coordinates (x y): ").split())
-        cell = board[y][x]
+        while True:
+            try:
+                x, y = map(int, input("Enter coordinates (x y): ").split())
+                cell = board[y][x]
+                break
+            except ValueError:
+                print("Invalid input")
+            except IndexError:
+                print("Index out of range")
+
         if cell.has_mine():
             print('Game over! You hit a mine.')
             break
         else:
             cell.open()
-            neighbors = [
-                (y-1,x+1),  (y- 1, x),  (y-1, x+1),    
-                (y,x-1),                (y, x+1),
-                (y+1,x-1),  (y+1, x),   (y+1,x+1)
+            neighbours = [
+                (y-1, x-1), (y-1, x), (y-1, x+1),
+                (y, x-1),             (y, x+1),
+                (y+1, x-1), (y+1, x), (y+1,x+1)
             ]
             # cell.neigbouring_mines += 1
-            for neighbour in neighbors:
-                (y, x) = neighbors
+            for neighbour in neighbours:
+                (y, x) = neighbour
                 try:
                     neighbour_cell = board[y][x]
                     if neighbour_cell.has_mine():
