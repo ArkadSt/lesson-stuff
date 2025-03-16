@@ -45,8 +45,22 @@ function drawBoard() {
         }
         board.push(row);
     }
-    generateMines(board, 10);
+    generateMines(board, 8);
     calculationAroundBombs(board)
+
+    // for(let i = 0; i < rows; i++) {
+    //     for(let j = 0; j < columns; j++) {
+    //         let cell = board[i][j]
+    //         console.log(cell.hasMine())
+    //         if (cell.hasMine()){
+    //             cell.getElement().innerHTML = `<p>*</p>`
+    //         } else {
+    //             cell.getElement().innerHTML = `<p>${cell.getNeighbouringBombs()}</p>`
+    //         }
+                
+    //     }
+    // }
+
     console.log(board);
 }
 
@@ -110,9 +124,6 @@ function calculationAroundBombs(board){
 
     }
 }
-
-
-
 
 
 
