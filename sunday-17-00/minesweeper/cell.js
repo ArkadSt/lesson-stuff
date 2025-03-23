@@ -1,4 +1,4 @@
-
+import  NewGame  from "./newgame.js"
 
 class Cell{
 
@@ -24,22 +24,35 @@ class Cell{
         this.#x = x
         this.#y = y
     }
-    
+   
 
 
     onFieldClick() {
         console.log(`Cell ${this.#x} ${this.#y} clicked!`)
-        if(this.#isRevealed) return
+        //if(this.#isRevealed) return
         //this.#isRevealed = true
 
         if (this.#hasMine){
+            // debugger;
+            for(let i = 0; i < this.#board.length; i++) {
+                for(let j = 0; j < this.#board[i].length; j++) {
+                    let cell = this.#board[i][j]
+                    if (cell.hasMine()){
+                        cell.getElement().style.backgroundColor = "yellow";
+                    }   
+                }
+            }
             this.#element.style.backgroundColor = "yellow";
-            // Game over alert + newGame()
+            
+            setTimeout(() => {
+                alert("Вы проиграли!")
+                NewGame()
+              }, 50); 
             return
-        } 
+        }
         this.#element.style.backgroundColor = "red";
         this.#element.innerHTML = `<p>${this.#neighbouringBombs}</p>`;
-
+        
         
 
         if (this.#neighbouringBombs === 0){

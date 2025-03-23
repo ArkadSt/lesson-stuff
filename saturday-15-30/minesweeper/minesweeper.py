@@ -6,6 +6,7 @@ class Cell:
         self._has_mine = False
         self._neighbouring_mines = 0
         self._display = '-'
+        self._flagged = False
 
     def has_mine(self):
         return self._has_mine
@@ -30,6 +31,16 @@ class Cell:
     def get_neighbouring_mines_number(self):
         return self._neighbouring_mines
 
+    #🚩
+    def toggle_flag(self):
+        if self._opened:
+            return
+        elif self._flagged:
+            self._display = "-"
+            self._flagged = False
+        else:
+            self._flagged = True
+            self._display = "🔴"
 
 def display_board(board):
     print(" ", end = " ")
@@ -106,15 +117,27 @@ def open_space(board, x, y):
 def play(board):
     while True:
         display_board(board)
+        setting_flag = False
         while True:
             try:
-                x, y = map(int, input("Enter coordinates (x y): ").split())
+                user_input = input("Enter coordinates (x y) or (f x y) to place a flag: ").split() # f 5 5
+                # ['1', '2'] ['f', '1', '2']
+                if user_input[0] == "f":
+                    x, y = map(int, user_input[1:])
+                    board[y][x].toggle_flag()
+                    setting_flag = True
+                    break
+                x, y = map(int, user_input)
                 cell = board[y][x]
                 break
-            except ValueError:
+            except ValueError: 
                 print("Invalid input")
+
             except IndexError:
                 print("Index out of range")
+
+        if setting_flag:
+            continue
 
         if cell.has_mine():
             print('Game over! You hit a mine.')
@@ -129,7 +152,7 @@ def init_game(height, width, mines):
     board = create_board(height, width, mines)
     play(board)
 
-difficulty = input("Select your difficulty: 1- Easy 2- Normal 3- difficult 4- insane 5- hard as heck ##- FUN value ").strip()
+difficulty = input("Select your difficulty: 1- Easy 2- Normal 3- difficult 4- insane 5- hard as heck ##- FUN value: ").strip()
 
 match difficulty:
     case "1":
@@ -153,4 +176,3 @@ match difficulty:
     case _:
         print("Invalid selection")
         exit()
-        

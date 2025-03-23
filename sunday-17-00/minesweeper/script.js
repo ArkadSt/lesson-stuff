@@ -10,7 +10,7 @@
 // 4. Завершить игру если все безопасные поля открыты или если нажал на мину. -
 // 5. Автоматически открывать пустые зоны. -
 // 6. Кнопка начать новую игру +
-
+import  NewGame  from "./newgame.js"
 import Cell from "./cell.js";
 //import generateMines from "./randombombs.js";
 function generateMines(board, minesCount) {
@@ -64,10 +64,10 @@ function drawBoard() {
     console.log(board);
 }
 
-function newGame() {
-    clearBoard();
-    drawBoard();
-}
+// function newGame() {
+//     clearBoard();
+//     drawBoard();
+// }
 
 function clearBoard() {
     document.getElementById("board").innerHTML = "";
@@ -78,7 +78,7 @@ function createButton(text) {
     newButton.innerText = text;
     newButton.classList.add("newButton");
     document.body.appendChild(newButton);
-    newButton.addEventListener("click", newGame);
+    newButton.addEventListener("click", NewGame);
 }
 
 // Initialize the game when the module loads
@@ -125,6 +125,4 @@ function calculationAroundBombs(board){
     }
 }
 
-
-
-export { InitGame, newGame, createButton };
+export { InitGame, createButton, drawBoard, clearBoard };
