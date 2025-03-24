@@ -13,12 +13,12 @@
 import  NewGame  from "./newgame.js"
 import Cell from "./cell.js";
 //import generateMines from "./randombombs.js";
-function generateMines(board, minesCount) {
+function generateMines(board, minesCount, rows, columns) {
     let minesLeft = minesCount;
 
     while (minesLeft > 0) {
-        let r = Math.floor(Math.random() * 8);
-        let c = Math.floor(Math.random() * 8);
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * columns);
 
         let cell = board[r][c]
         if (!cell.hasMine()){
@@ -31,10 +31,14 @@ function generateMines(board, minesCount) {
     
 }
 
-function drawBoard() {
+function drawBoard(rows, columns, mines) {
     let board = [];
-    let rows = 8;
-    let columns = 8;
+    // console.log("ROWS:" + rows)
+    // console.log("Columns:" + columns)
+    // console.log("Mines:" + mines)
+
+    document.getElementById("board").style = `grid-template-columns: repeat(${columns}, 50px)`
+
     
     for(let i = 0; i < rows; i++) {
         let row = [];
@@ -45,7 +49,7 @@ function drawBoard() {
         }
         board.push(row);
     }
-    generateMines(board, 8);
+    generateMines(board, mines, rows, columns);
     calculationAroundBombs(board)
 
     // for(let i = 0; i < rows; i++) {

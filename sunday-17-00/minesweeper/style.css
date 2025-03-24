@@ -1,6 +1,5 @@
 #board {
     display: grid;
-    grid-template-columns: repeat(8, 50px)
 }
   
 .closedField {
@@ -10,8 +9,4 @@
     background-color: rgb(80, 80, 80);
     margin: auto;
     text-align: center;
-}
-
-.closedField {
-
 }

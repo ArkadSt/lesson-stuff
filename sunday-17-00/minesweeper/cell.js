@@ -5,29 +5,46 @@ class Cell{
     #element;
     #hasMine;
     #isRevealed;
-    #isFlagged;
+    // #isFlagged;
     #neighbouringBombs;
     #board;
     #x;
     #y;
-    
+
 
     constructor(board, x, y){
         this.#element = document.createElement("div");
-        this.#element.addEventListener("click", () => this.onFieldClick())
+        this.#element.addEventListener("click", (e) => this.onFieldClick(e))
+        this.#element.addEventListener("contextmenu", (e) => {
+            e.preventDefault()
+            // e.target()
+            // this.#element
+            if (!this.#isRevealed) {
+                if (this.#element.innerHTML === "<p>🚩</p>") {
+                    this.#element.innerHTML = ""; 
+                }else{
+                    this.#element.innerHTML = "<p>🚩</p>"; 
+                }
+            }
+        })
         this.#element.classList.add("closedField")
         this.#hasMine = false;
         this.#isRevealed = false;
-        this.#isFlagged = false;
+        // this.#isFlagged = false;
         this.#neighbouringBombs = 0
         this.#board = board
         this.#x = x
         this.#y = y
+        // let a = (x) => {
+        //     console.log(x)
+        // }
+        // a("hello")
     }
    
+    // contextmenu event handler
+    // "🚩"
 
-
-    onFieldClick() {
+    onFieldClick(e) {
         console.log(`Cell ${this.#x} ${this.#y} clicked!`)
         //if(this.#isRevealed) return
         //this.#isRevealed = true
@@ -49,11 +66,8 @@ class Cell{
                 NewGame()
               }, 50); 
             return
-        }
-        this.#element.style.backgroundColor = "red";
-        this.#element.innerHTML = `<p>${this.#neighbouringBombs}</p>`;
-        
-        
+        } 
+
 
         if (this.#neighbouringBombs === 0){
             
@@ -67,7 +81,20 @@ class Cell{
         //if (this.#isRevealed) return 
         this.#element.style.backgroundColor = "red";
         this.#isRevealed = true
-        this.#element.innerHTML = `<p class="">${this.#neighbouringBombs}</p>`;
+
+        if (this.#neighbouringBombs === 0) {
+            this.#element.innerHTML = "";
+        }else {
+            this.#element.innerHTML = `<p>${this.#neighbouringBombs}</p>`;
+        }
+
+        console.log()
+        if (this.#board.flat().every((cell) => cell.isRevealed() || cell.hasMine())){
+            setTimeout(() => {
+                alert("Победа!")
+                NewGame()
+              }, 50); 
+        }
         
     }
 
