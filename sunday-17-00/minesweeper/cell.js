@@ -5,7 +5,6 @@ class Cell{
     #element;
     #hasMine;
     #isRevealed;
-    // #isFlagged;
     #neighbouringBombs;
     #board;
     #x;
@@ -17,8 +16,6 @@ class Cell{
         this.#element.addEventListener("click", (e) => this.onFieldClick(e))
         this.#element.addEventListener("contextmenu", (e) => {
             e.preventDefault()
-            // e.target()
-            // this.#element
             if (!this.#isRevealed) {
                 if (this.#element.innerHTML === "<p>🚩</p>") {
                     this.#element.innerHTML = ""; 
@@ -30,24 +27,16 @@ class Cell{
         this.#element.classList.add("closedField")
         this.#hasMine = false;
         this.#isRevealed = false;
-        // this.#isFlagged = false;
         this.#neighbouringBombs = 0
         this.#board = board
         this.#x = x
         this.#y = y
-        // let a = (x) => {
-        //     console.log(x)
-        // }
-        // a("hello")
+
     }
    
-    // contextmenu event handler
-    // "🚩"
 
     onFieldClick(e) {
         console.log(`Cell ${this.#x} ${this.#y} clicked!`)
-        //if(this.#isRevealed) return
-        //this.#isRevealed = true
 
         if (this.#hasMine){
             // debugger;
@@ -62,7 +51,7 @@ class Cell{
             this.#element.style.backgroundColor = "yellow";
             
             setTimeout(() => {
-                alert("Вы проиграли!")
+                alert("You lost!")
                 NewGame()
               }, 50); 
             return
@@ -78,7 +67,6 @@ class Cell{
         
     }
     openCell(){
-        //if (this.#isRevealed) return 
         this.#element.style.backgroundColor = "red";
         this.#isRevealed = true
 
@@ -91,7 +79,7 @@ class Cell{
         console.log()
         if (this.#board.flat().every((cell) => cell.isRevealed() || cell.hasMine())){
             setTimeout(() => {
-                alert("Победа!")
+                alert("Victory!")
                 NewGame()
               }, 50); 
         }
@@ -104,9 +92,8 @@ class Cell{
         //debugger;
         console.log(`Revealing emply space around cell ${x} ${y}`)
         let cell = this.#board[y][x]
-        if (cell.hasMine() /*|| cell.getNeighbouringBombs() > 0*/ || cell.isRevealed()){
+        if (cell.hasMine() || cell.isRevealed()){
             console.log(cell.hasMine())
-            //console.log(cell.getNeighbouringBombs())
             console.log(cell.isRevealed())
             console.log(`Exiting at ${x} ${y}`)
             return
@@ -124,10 +111,6 @@ class Cell{
 
         for(let [r, c] of CORDS){
             if (r >= 0 && c >= 0 && r < this.#board.length && c < this.#board[y].length) {
-            // let nearCell = this.#board[r][c]
-            // if (nearCell.isRevealed()){
-            //     nearCell.openCell()
-            // }
                 this.revealEmptySpace(c, r)
         }
     }

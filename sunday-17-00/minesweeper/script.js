@@ -10,9 +10,20 @@
 // 4. Завершить игру если все безопасные поля открыты или если нажал на мину. -
 // 5. Автоматически открывать пустые зоны. -
 // 6. Кнопка начать новую игру +
+
+// board = [
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
+// ]
+
 import  NewGame  from "./newgame.js"
 import Cell from "./cell.js";
-//import generateMines from "./randombombs.js";
 function generateMines(board, minesCount, rows, columns) {
     let minesLeft = minesCount;
 
@@ -37,8 +48,8 @@ function drawBoard(rows, columns, mines) {
     // console.log("Columns:" + columns)
     // console.log("Mines:" + mines)
 
-    document.getElementById("board").style = `grid-template-columns: repeat(${columns}, 50px)`
-
+    document.getElementById("board").style["grid-template-columns"] = `repeat(${columns}, 50px)`;
+    document.getElementById("board").style["grid-template-rows"] = `repeat(${rows}, 50px)`;
     
     for(let i = 0; i < rows; i++) {
         let row = [];
@@ -52,26 +63,8 @@ function drawBoard(rows, columns, mines) {
     generateMines(board, mines, rows, columns);
     calculationAroundBombs(board)
 
-    // for(let i = 0; i < rows; i++) {
-    //     for(let j = 0; j < columns; j++) {
-    //         let cell = board[i][j]
-    //         console.log(cell.hasMine())
-    //         if (cell.hasMine()){
-    //             cell.getElement().innerHTML = `<p>*</p>`
-    //         } else {
-    //             cell.getElement().innerHTML = `<p>${cell.getNeighbouringBombs()}</p>`
-    //         }
-                
-    //     }
-    // }
-
     console.log(board);
 }
-
-// function newGame() {
-//     clearBoard();
-//     drawBoard();
-// }
 
 function clearBoard() {
     document.getElementById("board").innerHTML = "";
@@ -90,19 +83,6 @@ function InitGame() {
     createButton("New Game");
     drawBoard();
 }
-
-// board = [
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-//     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],   
-// ]
-
-
 
 function calculationAroundBombs(board){
     for(let i=0; board.length > i; i++){

@@ -1,0 +1,152 @@
+q* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin-left: 29px;
+}
+
+
+.search-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search {
+    background-color: #f0f0f0;
+    border-radius: 16px;
+    display: flex;
+    padding: 8px 17px;
+    width: 80%;
+    margin-top: 22px;
+}
+
+.Loop {
+    height: 24px;
+}
+
+.search input {
+    border: none;
+    background-color: transparent;
+    margin-left: 5px;
+    outline: none;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.notification {
+    width: 35px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-left: 12px;
+    font-size: 5px;
+    margin-top: 25px;
+}
+
+
+/* ------------- */
+
+.slider-container {
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
+.slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+.slider {
+    display: flex;
+    width: max-content;
+}
+
+.slide {
+    /* width: 85vw; */
+    width: 310px;
+    max-width: 340px;
+    /* height: 250px; */
+    flex-shrink: 0;
+    /* margin-right: 0px; */
+    scroll-snap-align: start;
+    /* padding-right: 0.1%; */
+    border-color: black;
+    /* border-style: solid; */
+}
+
+.slide:last-child {
+    margin-right: 0;
+}
+
+.slide img {
+    
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.slide h2 {
+    font-size: 110%;
+    /* border-style: solid; */
+    width: 80%;
+}
+
+
+.filter-group {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    display: flex;
+    gap: 8px;
+    height: 31px;
+    margin-top: 48px;
+    overflow-x: auto;
+}
+
+.filter-group input {
+    display: none;
+}
+
+.filter-group label {
+    color: #828282;
+    font-family: "Open Sans";
+    font-weight: 400px;
+    font-size: 14px;
+    padding: 6px 8px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
+    
+}
+.filter{
+    scroll-snap-align: start;
+
+}
+
+.filter-group input:checked + label {
+    background-color: black;
+    color: white;
+    border-color: rgb(0, 0, 0);
+}
+
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.blog-list-item {
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
