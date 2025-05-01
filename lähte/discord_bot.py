@@ -2,10 +2,15 @@ import discord
 from discord.ext import commands
 import random
 
-# here goes the token 
+config = open("discord.token", 'r')
+token = config.read()
+config.close()
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
+
+bot.katsete_arv = 5
+bot.computer_choice = random.randint(1, 100)
 
 @bot.event
 async def on_ready():
@@ -44,6 +49,27 @@ async def play(ctx, user_choice):
     await ctx.send("Computer choice was: " + computer_choice)
 
 
+@bot.command()
+async def guess(ctx, user_choice):
+    user_choice = int(user_choice)
 
+    if (bot.computer_choice == user_choice):
+        await ctx.send("You have won!")
+        bot.katsete_arv = 5
+        bot.computer_choice = random.randint(1, 100)
+    elif (bot.computer_choice > user_choice):
+        await ctx.send("My number is bigger")
+    elif (bot.computer_choice < user_choice):
+        await ctx.send("My number is smaller")
+    else:
+        await ctx.send("Invalid input")
+
+    bot.katsete_arv -= 1
+    await ctx.send(str(bot.katsete_arv) + " guesses remained")
+
+    if bot.katsete_arv == 0:
+        await ctx.send("You Lost")
+        bot.katsete_arv = 5
+        bot.computer_choice = random.randint(1, 100)
 
 bot.run(token)
