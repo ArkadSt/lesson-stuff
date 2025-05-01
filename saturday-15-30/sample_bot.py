@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands
 import json
 
 with open("discord_config.json", "r", encoding="utf-8") as file:
@@ -7,7 +8,7 @@ with open("discord_config.json", "r", encoding="utf-8") as file:
 token = config["token"]
 
 intents = discord.Intents.all()
-client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix="!", intents=intents)
 
 
 @client.event
@@ -15,12 +16,9 @@ async def on_ready():
     print(f"{client.user} has connected to Discord!")
 
 
-@client.event
-async def on_message(msg):
-    if msg.author != client.user:
-        if msg.content.lower().startswith("hi"):
-            await msg.add_reaction("🥳")
-            await msg.channel.send(f"Hi, {msg.author.display_name}")
+@client.command()
+async def hello(ctx):
+    await ctx.send(f"Hello {ctx.author.mention}!")
 
 
 @client.event

@@ -1,4 +1,4 @@
-#!/home/arkadi/Desktop/lesson-stuff/saturday-15-30/flask/.venv/bin/python
+#!/home/arkadi/Desktop/lesson-stuff/saturday-15-30/flask/.venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys
