@@ -2,15 +2,19 @@ import discord
 from discord.ext import commands
 import random
 
-config = open("discord.token", 'r')
-token = config.read()
-config.close()
+try:
+    with open("discord.token", 'r') as config:
+        token = config.read()
+except FileNotFoundError:
+    print("File discord.token not found. Quitting...")
+    exit(1)
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-bot.katsete_arv = 5
-bot.computer_choice = random.randint(1, 100)
+# bot.katsete_arv = 5
+# bot.computer_choice = random.randint(1, 100)
+bot.games = {}
 
 @bot.event
 async def on_ready():
@@ -51,25 +55,36 @@ async def play(ctx, user_choice):
 
 @bot.command()
 async def guess(ctx, user_choice):
-    user_choice = int(user_choice)
+    player = ctx.author
+    
+    if player not in bot.games:
+        bot.games[player] = {
+            "computer_choice": random.randint(1, 100),
+            "katsete_arv": 5
+        }
 
-    if (bot.computer_choice == user_choice):
+    user_choice = int(user_choice)
+    computer_choice = bot.games[player]["computer_choice"]
+    if (computer_choice == user_choice):
         await ctx.send("You have won!")
-        bot.katsete_arv = 5
-        bot.computer_choice = random.randint(1, 100)
-    elif (bot.computer_choice > user_choice):
+        del bot.games[player]
+    elif (computer_choice > user_choice):
         await ctx.send("My number is bigger")
-    elif (bot.computer_choice < user_choice):
+    elif (computer_choice < user_choice):
         await ctx.send("My number is smaller")
     else:
         await ctx.send("Invalid input")
 
-    bot.katsete_arv -= 1
-    await ctx.send(str(bot.katsete_arv) + " guesses remained")
+    bot.games[player]["katsete_arv"] -= 1
+    await ctx.send(str(bot.games[player]["katsete_arv"]) + " guesses remained")
 
-    if bot.katsete_arv == 0:
-        await ctx.send("You Lost")
-        bot.katsete_arv = 5
-        bot.computer_choice = random.randint(1, 100)
+    if bot.games[player]["katsete_arv"] == 0:
+        await ctx.send(f"You Lost. My number was {computer_choice}")
+        del bot.games[player]
+
+@bot.command()
+async def purge(ctx, message_n):
+    message_n = int(message_n)
+    await ctx.channel.purge(limit=message_n)
 
 bot.run(token)
