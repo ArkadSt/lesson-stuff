@@ -52,6 +52,36 @@ def fun8():
     b = {...}
     print(b) # {"apple": 5, "pear": 4, "cherry": 6}
 
+def fun9():
+    a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    b = ...
+    print(b) # [2, 4, 6, 8]
+
+def fun10():
+    a = ["apple", "banana", "cherry"]
+    b = ["Mark", "Marek", "Kristjan"]
+    c = ...
+    print(c) # [("apple", "Mark"), ("banana", "Marek"), ("cherry", "Kristjan")]
+
+# a = [1,2,3,4]
+# for i in range(len(a)):
+#     print(a[i])
+
+
+# Я люблю яблоки и яблоки любят меня
+#
+# Я: 1
+# люблю: 1
+# яблоки: 2
+# и: 1
+# любят: 1
+# меня : 1
+
+def fun11():
+    a = {"apple": 5, "pear": 4, "cherry": 6}
+    b = {a[i]:i for i in a}
+    print(b) # {5: "apple", 4: "pear", 6: "cherry"}
+
 def fun0():
     a = [1,2,3,4,5]
     for i in a:

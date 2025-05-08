@@ -2,13 +2,13 @@ import sys
 
 print(sys.argv)
 
-quist = sys.argv[1]  # input('Какой файл посмотреть' + '😏 ' + '? ')
+file_path = sys.argv[1]  # input('Какой файл посмотреть' + '😏 ' + '? ')
 
 try:
-    with open(file=quist, mode="r") as f:
+    with open(file=file_path, mode="r") as f:
         content = f.read()
 
-    with open(file=quist, mode="a") as f:
+    with open(file=file_path, mode="a") as f:
         f.write("\n\n" + content.replace("0", "o").replace("4", "a").replace("3", "e"))
 
 except FileNotFoundError:

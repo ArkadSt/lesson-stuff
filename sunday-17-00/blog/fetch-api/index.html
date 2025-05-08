@@ -8,17 +8,37 @@
 <body>
     <div id="posts"></div>
     <script>
+
+
+
+        // let object = {
+        //     "name": "Oleg",
+        //     "age": 14,
+        //     "address": "",
+        //     "telephone": "+372 5555 5555",
+        //     ""
+        // }
+
+
+
+
+
+
+        // задание взять 4-й пост
+
         let posts_json = {}
-        fetch("https://jsonplaceholder.typicode.com/posts")
+        fetch("https://dummyjson.com/posts")
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
-            for (const post of data){
+            console.log(typeof data)
+            for (const post of data["posts"]){ 
                 let post_div = document.createElement("div")
                 let header = document.createElement("h3")
                 let body = document.createElement("p")
                 header.textContent = post["title"]
                 body.textContent = post["body"]
+                // здесь не хватает views
                 post_div.appendChild(header)
                 post_div.appendChild(body)
                 document.getElementById("posts").appendChild(post_div)
@@ -26,6 +46,22 @@
         })
         .catch((err) => console.log(err.message));
 
+        // let response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        // let data = await response.json()
+
+        // console.log(data)
+        // console.log(typeof data)
+
+        // for (const post of data){
+        //     let post_div = document.createElement("div")
+        //     let header = document.createElement("h3")
+        //     let body = document.createElement("p")
+        //     header.textContent = post["title"]
+        //     body.textContent = post["body"]
+        //     post_div.appendChild(header)
+        //     post_div.appendChild(body)
+        //     document.getElementById("posts").appendChild(post_div)
+        // }
         
     </script>
 </body>
