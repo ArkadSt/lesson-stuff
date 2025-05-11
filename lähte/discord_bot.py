@@ -15,6 +15,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 # bot.katsete_arv = 5
 # bot.computer_choice = random.randint(1, 100)
 bot.games = {}
+bot.ranking = {}
 
 @bot.event
 async def on_ready():
@@ -55,19 +56,28 @@ async def play(ctx, user_choice):
 
 @bot.command()
 async def guess(ctx, user_choice):
-    player = ctx.author
+    player = ctx.author.name
     
     if player not in bot.games:
         bot.games[player] = {
             "computer_choice": random.randint(1, 100),
-            "katsete_arv": 5
+            "katsete_arv": 7
+        }
+    
+    if player not in bot.ranking:
+        bot.ranking[player] = {
+            "wins": 0,
+            "losses": 0
         }
 
+    
     user_choice = int(user_choice)
     computer_choice = bot.games[player]["computer_choice"]
     if (computer_choice == user_choice):
         await ctx.send("You have won!")
         del bot.games[player]
+
+        bot.ranking[player]["wins"] += 1
     elif (computer_choice > user_choice):
         await ctx.send("My number is bigger")
     elif (computer_choice < user_choice):
@@ -81,10 +91,17 @@ async def guess(ctx, user_choice):
     if bot.games[player]["katsete_arv"] == 0:
         await ctx.send(f"You Lost. My number was {computer_choice}")
         del bot.games[player]
+        
+        bot.ranking[player]["losses"] += 1
 
 @bot.command()
 async def purge(ctx, message_n):
     message_n = int(message_n)
     await ctx.channel.purge(limit=message_n)
+
+@bot.command()
+async def ranking(ctx):
+    await ctx.send(bot.ranking)
+
 
 bot.run(token)

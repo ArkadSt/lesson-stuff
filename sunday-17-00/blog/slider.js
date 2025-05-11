@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const slider = document.getElementById('slider');
     let isDown = false;
@@ -10,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const slide = slider.querySelector('.slide');
         slideWidth = slide.offsetWidth + (slide.offsetWidth * 0.03); // Width + margin
     }
-    
+
     calculateSlideWidth();
     window.addEventListener('resize', calculateSlideWidth);
     

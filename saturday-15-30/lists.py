@@ -1,3 +1,4 @@
+import itertools
 
 def fun1():
     a = ["1","2","3","4"]
@@ -82,10 +83,19 @@ def fun11():
     b = {a[i]:i for i in a}
     print(b) # {5: "apple", 4: "pear", 6: "cherry"}
 
+def fun12():
+    words = ["apple", "ba"]
+    b = {word: set(["".join(permutation) for permutation in itertools.permutations(word)]) for word in words}
+    print(b) # {"apple": ["paple", "appel", ...], "ba", ["ab"]}
+    # использовать:
+    # itertools.permutations("apple")
+    # "".join(('a', 'p', 'p', 'e', 'l')) # "appel"
+
+
 def fun0():
     a = [1,2,3,4,5]
     for i in a:
         print(i)
 
 
-fun7()
+fun12()
