@@ -6,7 +6,7 @@ def mult(x, y):
 def abc():
     print("abc")
 
-def
+
 
 #x = 0
 #while x < 10:
@@ -59,7 +59,7 @@ ziguli = Car("Жигули", 1000000, "самогон", 200, "magic")
 zina = Racer("Баба Зина", math.inf, 0, ziguli)
 kristian = Racer("Kritsian", 13, 0, toyota)
 
-print(racer)
+print(zina)
 
 # Увеличить streak у победителя
 # Заправить машину
