@@ -46,7 +46,7 @@ async function loadPosts(){
         slide.appendChild(img);
         slide.appendChild(h2);
         slide.appendChild(metadata);
- m    }
+    }
 
     // let slide = document.createElement("div")
 
